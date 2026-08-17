@@ -1,0 +1,9 @@
+L'idea iniziale è quella di creare una semplice chat, appoggiandomi ad un API.
+Andrò inoltre a memorizzare rispettivamente utenti, chat e domanda.
+Le domande saranno in relazioni con l'entià chat, infatti si avrà la relazione:
+chat-contiene->domanda
+Mentre la connessione tra chat ed utente è frutto della relazione:utente-possiede->chat 
+Per effettaure la comunicazione tra il mio programma ed il bd, mi affiderò ad un modulo
+dedicato, ossia DatabaseManager.py.
+Attraverso un cursore andrò ad eseguire le mie interrogazioni sul db.
+Ovviamente sarà presente anche il main, per poter ricevere dati dall'utente e giostrare i metodi del DatabaseManager.
