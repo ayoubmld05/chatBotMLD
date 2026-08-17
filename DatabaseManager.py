@@ -1,5 +1,8 @@
 import psycopg
-DB_CONFIG = "dbname=chatbot user=postgres password=segreto host=localhost port=5432"
+import os
+from dotenv import load_dotenv
+load_dotenv()
+DB_CONFIG = os.getenv("DB_PASSWORD")
 def getUtente(idUtente:int):
     with psycopg.connect(DB_CONFIG) as connessione:
         with connessione.cursor() as cursore:

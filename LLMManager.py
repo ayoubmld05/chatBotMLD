@@ -1,6 +1,9 @@
 import requests
-API_URL = "https://api.esempio-ai.com/v1/chat"
-API_KEY = "CHIAVE_SEGRETA"
+import os
+from dotenv import load_dotenv
+load_dotenv() 
+API_KEY = os.getenv("API_KEY_SEGRETA")
+API_URL = "https://api.groq.com/openai/v1/chat/completions"
 
 def gestioneRichiesta(lista:list)->str: 
     memoria_formatta=[]
@@ -12,8 +15,8 @@ def gestioneRichiesta(lista:list)->str:
     }
     
     payload = {
-        "modello": "gpt-4",
-        "messaggi": memoria_formatta
+        "model": "llama3-8b-8192",
+        "messages": memoria_formatta
     }
     risposta=requests.post(url=API_URL, headers=header, json=payload)
     if risposta.status_code==200:
@@ -31,8 +34,8 @@ def richiediTitolo(richiesta:str)->str:
     }
     
     payload = {
-        "modello": "gpt-4",
-        "messaggi": [
+        "model": "gpt-4",
+        "messages": [
             {"role": "user", "content": richiestaTitolo} 
         ]
     }
