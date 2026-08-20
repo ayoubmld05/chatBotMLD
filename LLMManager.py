@@ -8,14 +8,15 @@ API_URL = "https://api.groq.com/openai/v1/chat/completions"
 def gestioneRichiesta(lista:list)->str: 
     memoria_formatta=[]
     for ruolo, testo,data in lista:
-        memoria_formatta.append({"role": ruolo, "content": testo})
+        ruoloFormato=ruolo.strip()
+        memoria_formatta.append({"role": ruoloFormato, "content": testo})
     header = {
         "Authorization": f"Bearer {API_KEY}",
         "Content-Type": "application/json"
     }
     
     payload = {
-        "model": "llama3-8b-8192",
+        "model": "openai/gpt-oss-20b",
         "messages": memoria_formatta
     }
     risposta=requests.post(url=API_URL, headers=header, json=payload)
@@ -24,7 +25,7 @@ def gestioneRichiesta(lista:list)->str:
         testo_ai = dati.get("choices", [{}])[0].get("message", {}).get("content", "") #questo mi permette di prendere solo il succo del messaggio
         return testo_ai
     else:
-        return f"Errore di connessione con MLD. Codice: {risposta.status_code}"
+        return f"Errore {risposta.status_code} da Groq: {risposta.text}"
     
 def richiediTitolo(richiesta:str)->str:
     richiestaTitolo=richiesta + "\n \n Riassumi questo testo in poche parole, per formare un fantastico titolo che riesca a descrivere tutto"
@@ -34,7 +35,7 @@ def richiediTitolo(richiesta:str)->str:
     }
     
     payload = {
-        "model": "gpt-4",
+        "model": "openai/gpt-oss-20b",
         "messages": [
             {"role": "user", "content": richiestaTitolo} 
         ]

@@ -6,6 +6,14 @@ Mentre la connessione tra chat ed utente è frutto della relazione:utente-possie
 Per effettaure la comunicazione tra il mio programma ed il bd, mi affiderò ad un modulo
 dedicato, ossia DatabaseManager.py.
 Attraverso un cursore andrò ad eseguire le mie interrogazioni sul db.
-Ovviamente sarà presente anche il main, per poter ricevere dati dall'utente e giostrare i metodi del DatabaseManager.
 Mentre per utilizzo dell'API dedico un modulo, ossia LLMManager.
 Per adesso, coniene solamente 2 metodi, ossia l'invio della richiesta e la creazione per ogni chat di un titolo.
+Per migliorare il programma, non mi limito a chiedere un id univoco...infatti vado ad effettuare una registrazione, attraverso email e password.
+Questi due attributi, email, chiave primaria e password, unique nel database, identificheranno gli utenti in modo univoco.
+Per prendere in input l'email, importo il modulo re, creao un pattern:pattern_email = r'^[\w\.-]+@[\w\.-]+\.\w+$', per poi appoggiarmi alla una funzione re.match.
+Mentre per la password, un discorso molto simile, infatti vado ad appoggiarmi sempre alla funzione match(), cambiando però solo il pattern:pattern_password = r"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"
+Inoltre, utilizzo le sessioni per archestrare il sistema, infatti utilizzare adesso la librearia streamlit mi obbliga a dover salvare le informazioni importanti ad ogni ricarimento della pagina, come appunto, il nome e l'email dell'utente.
+In aggiunta, attrvaerso l'API invio il resoconto di tutti i messaggi passati ma non facendo superare un massimo di 6 messaggi, per poter ad ogni promt avere un background migliore, permettendo di poter rispondere al meglio.
+
+TO DO:
+-far apparire il titolo pian piano che esce

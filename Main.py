@@ -78,3 +78,7 @@ def avviaChat():
         print(f"{risposta}")
         salvaMessaggio(chat_attuale,'assistant',risposta)
         richiesta=input("\nChiedi pure...")
+
+
+if __name__ == "__main__":
+    avviaChat(),
